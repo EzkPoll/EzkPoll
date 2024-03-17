@@ -9,9 +9,8 @@ export default function Home() {
   
   const handleSignInWithMetaMask = async () => {
     
-    console.log("Sign in with MetaMask clicked");
     const isInstalled = !!injectedMetamaskProvider();
-    console.log("aaa")
+    
     if (isInstalled) {
       const wallet = metamaskWallet(); 
       
@@ -56,9 +55,7 @@ export default function Home() {
               <button className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-black hover:bg-gray-900">
                 <i className="fab fa-apple mr-2"></i> Sign in with Apple
               </button>
-              <ConnectButton
-                chain={chainById}
-              />
+              
             </div>
           </div>
         </div>
