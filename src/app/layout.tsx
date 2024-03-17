@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThirdwebProvider } from "@/app/thirdweb";
+import { client } from "@/app/client";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ThirdwebProvider
+          client={client}
+        >
+          {children}
+        </ThirdwebProvider>
+      </body>
     </html>
   );
 }
+
+{/* <ThirdwebProvider
+  chainRpc={{ [ChainId.Mainnet]: "rpc URL here!" }}
+  desiredChainId={ChainId.Mainnet}
+>
+  <Component {...pageProps} />
+</ThirdwebProvider> */}
