@@ -7,18 +7,16 @@ import { useRouter } from 'next/navigation';
 const PageFinishCreate = () => {
 
     const router = useRouter();
-    const handleBack = () => {
+
+    const handleBackHome = () => {
         router.push("/");
-    }
-    const handlePreview = () => {
-        router.push("/join_poll");
     }
     return (
         <>
             <AddressLabel/>
             <div className='flex flex-col max-w-xl mx-auto'>
                 <h1 className="text-black text-4xl text-center font-bold">
-                    Congrats! Your Testcase just published!
+                    Thank you for participating
                 </h1>
                 <p className="text-gray-600 text-xl text-center my-10">
                     Your voice matters and will make impact to he better world
@@ -28,16 +26,10 @@ const PageFinishCreate = () => {
                     <Image src={thumbUp} width={296} height={244} alt="finish"/>
                     <div className="px-6 flex gap-6 justify-center items-start self-stretch relative w-full bg-transparent">
                         <button
-                            className='w-1/2 py-4 text-base bg-gray-500 text-white hover:bg-blue-700 text-blue-700  hover:text-white font-bold rounded-[39px]'
-                            onClick={handleBack}
-                        >
-                            Back
-                        </button>
-                        <button
                             className='w-1/2 block py-4 text-base bg-[#5957ff] text-white hover:bg-blue-700 text-blue-700  hover:text-white font-bold rounded-[39px]'
-                            onClick={handlePreview}
+                            onClick={handleBackHome}
                         >
-                            Preview
+                            Back Home
                         </button>
                     </div>
                 </div>
