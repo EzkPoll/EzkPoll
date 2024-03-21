@@ -28,11 +28,8 @@ const YourComponent = () => {
       if (!address) {
         throw new Error('No user or provider')
       }
-      if (!image1) {
-        throw new Error('No Image 1 found')
-      }
-      if (!image2) {
-        throw new Error('No Image 2 found')
+      if (!image1 || !image2) {
+        throw new Error('Please select both images')
       }
 
       const key = `${address}-${+new Date()}`;
@@ -79,15 +76,20 @@ const YourComponent = () => {
   };
 
   return (
-    <div>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={SaveVideoClick}>Upload Video</button>
-      <br />
-      <input type="file" onChange={handleImage1Change} />
-      <input type="file" onChange={handleImage2Change} />
-      <button onClick={ImageSaveClick}>Upload Images</button>
-      {loading && <div>Loading...</div>}
-    </div>
+    <div className="container mx-auto p-4">
+  <div className="mb-4">
+    <label htmlFor="videoInput" className="block text-white-700 font-bold mb-2">Upload Video</label>
+    <input type="file" id="videoInput" onChange={handleFileChange} className="mb-2" />
+    <button onClick={SaveVideoClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload</button>
+  </div>
+  <div className="mb-4">
+  <label htmlFor="videoInput" className="block text-white-700 font-bold mb-2">Upload Image</label>
+    <input type="file" onChange={handleImage1Change} className="mb-2" />
+    <input type="file" onChange={handleImage2Change} className="mb-2" />
+    <button onClick={ImageSaveClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload Images</button>
+  </div>
+  {loading && <div>Loading...</div>}
+  </div>
   );
 };
 
