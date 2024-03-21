@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "chart.js": "^4.4.2",
     "firebase": "^10.9.0",
     "next": "14.1.3",
     "pino-pretty": "^10.3.1",
     "react": "^18",
     "react-dom": "^18",
+    "recoil": "^0.7.7",
     "thirdweb": "1.0.0-beta-75bec3710151c4255c8314e3ce8dd366265b6c58-20240317031400"
   },
   "devDependencies": {
