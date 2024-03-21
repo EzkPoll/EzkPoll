@@ -20,10 +20,10 @@ export default function RootLayout({
           client={client}
         >
           <RecoilRoot>
-            <div className="bg-gradient-to-br from-blue-200 to-white min-h-screen flex items-center justify-center">
+            <div className="bg-gradient-to-br from-blue-200 to-white min-h-screen flex">
               <div className="w-full mx-auto">
-                  <Icon />
-              {children}
+                <Icon />
+                {children}
               </div>
             </div>
           </RecoilRoot>

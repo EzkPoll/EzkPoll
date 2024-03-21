@@ -5,11 +5,17 @@ import upload_icon from "@/assets/upload.png"
 import Image from "next/image";
 import { AddressLabel } from "@/components/components";
 import WelcomeBanner from "@/components/welcome_banner";
+import { useRouter } from "next/navigation";
 
 const Home = () => {
     const [description, setDescription] = useState("");
     const [subject, setSubject] = useState("");
     const [duration, setDuration] = useState("");
+    const router = useRouter();
+
+    const handleCreatePoll = () => {
+        router.push("/create_poll_finish");
+    }
 
     return (
         <>
@@ -20,7 +26,7 @@ const Home = () => {
                     <h2 className="text-black text-center text-3xl">Create A/B testing poll</h2>
                     {/*FIXME AB testing component*/}
                 </div>
-                <form action="" className="w-full block">
+                <form action="javascript:void(0)" className="w-full block" onChange={(e) => e.preventDefault()}>
                     <p>
                         You can upload A/B testing images for generating test case
                     </p>
@@ -83,7 +89,10 @@ const Home = () => {
                             <UploadComponent/>
                         </div>
                     </div>
-                    <button className=" mt-5 mx-auto block bg-sky-blue hover:bg-blue-700 text-blue-700  hover:text-white font-bold py-2 px-4 rounded-lg">
+                    <button
+                        className=" mt-5 mx-auto block bg-sky-blue hover:bg-blue-700 text-blue-700  hover:text-white font-bold py-2 px-4 rounded-lg"
+                        onClick={handleCreatePoll}
+                    >
                         Create Poll
                     </button>
                 </form>
