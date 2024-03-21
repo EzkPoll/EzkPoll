@@ -46,3 +46,12 @@ button.create {
   right: 10px;
   padding: 14px 32px;
 }
+.address {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+input {
+  color: black;
+}

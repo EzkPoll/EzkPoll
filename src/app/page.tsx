@@ -4,15 +4,26 @@ import { injectedMetamaskProvider, metamaskWallet } from "thirdweb/wallets";
 import { defineChain } from 'thirdweb';
 import { useActiveAccount, useActiveWallet, useActiveWalletConnectionStatus } from "thirdweb/react";
 import HomePage from "@/components/page_home";
+import { useEffect } from "react";
+import { RecoilRoot, useSetRecoilState } from "recoil";
+import { addressAtom } from "@/state/state";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
 
     const address = useActiveAccount();
-
+    const setAddress = useSetRecoilState(addressAtom);
     const showCurrentAddress = async () => {
         console.log("address", address)
     };
 
+    const router = useRouter();
+
+    useEffect(() => {
+        if (address) {
+            setAddress(address);
+        }
+    }, [address]);
     const handleSignInWithMetaMask = async () => {
 
         console.log("Sign in with MetaMask clicked");
@@ -39,11 +50,13 @@ export default function Home() {
     };
 
     return (
-        <div className="bg-gradient-to-br from-blue-200 to-white min-h-screen flex items-center justify-center">
-            <div className="w-full mx-auto">
-                <Icon />
-                <HomePage/>
+        <RecoilRoot>
+            <div className="bg-gradient-to-br from-blue-200 to-white min-h-screen flex items-center justify-center">
+                <div className="w-full mx-auto">
+                    <Icon />
+                    <HomePage/>
+                </div>
             </div>
-        </div>
+        </RecoilRoot>
     );
 }

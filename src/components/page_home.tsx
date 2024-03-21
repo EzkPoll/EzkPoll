@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ConnectButton } from "thirdweb/react";
 import { chainById } from "../utils/chains";
+import { useRouter } from 'next/navigation';
+
 interface PollInfo {
     title: string,
     description: string
@@ -23,15 +25,23 @@ const HomePage = () => {
     const [ongoingPolls, setOngoingPolls] = useState<any[]>(TEST_ON_GOING_POLLS);
     const [completedPolls, setCompletedPolls] = useState<any[]>(TEST_COMPLETED_POLLS);
 
+    const router = useRouter();
+
+    const handleCreatePoll = () => {
+        router.push("/create_poll");
+    }
+
     useEffect(() => {
         console.log(ongoingPolls);
         console.log(completedPolls);
     }, [ongoingPolls, completedPolls])
 
     return (
-        <div className="w-full mx-auto ">
+        <div className="w-full mx-auto">
             <button
-                className="bg-sky-blue hover:bg-blue-700 text-blue-700  hover:text-white font-bold py-2 px-4 rounded-lg create">
+                className="bg-sky-blue hover:bg-blue-700 text-blue-700  hover:text-white font-bold py-2 px-4 rounded-lg create"
+                onClick={handleCreatePoll}
+            >
                 Create Poll
             </button>
             <h1 className="text-black text-7xl text-center font-bold">
