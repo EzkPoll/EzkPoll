@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { ConnectButton } from "thirdweb/react";
 import { chainById } from "../utils/chains";
 import { useRouter } from 'next/navigation';
+import WelcomeBanner from "./welcome_banner";
 
 interface PollInfo {
     title: string,
@@ -31,11 +32,6 @@ const HomePage = () => {
         router.push("/create_poll");
     }
 
-    useEffect(() => {
-        console.log(ongoingPolls);
-        console.log(completedPolls);
-    }, [ongoingPolls, completedPolls])
-
     return (
         <div className="w-full mx-auto">
             <button
@@ -44,12 +40,7 @@ const HomePage = () => {
             >
                 Create Poll
             </button>
-            <h1 className="text-black text-7xl text-center font-bold">
-                Welcome to EzkPoll
-            </h1>
-            <p className="text-gray-600 text-3xl text-center my-6">
-                Web2 Comfort, Web3 Power. Cast in Privacy, Count in Impact
-            </p>
+            <WelcomeBanner/>
             <div className="">
                 <div className="w-4/5 flex mx-auto">
                 <div className=" w-1/2 pr-5">

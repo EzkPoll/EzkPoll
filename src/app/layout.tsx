@@ -6,6 +6,7 @@ import { ThirdwebProvider } from "@/utils/thirdweb";
 import { client } from "@/utils/client";
 import { RecoilRoot } from "recoil";
 const inter = Inter({ subsets: ["latin"] });
+import { Icon } from "@/components/icon";
 
 export default function RootLayout({
   children,
@@ -19,7 +20,12 @@ export default function RootLayout({
           client={client}
         >
           <RecoilRoot>
-            {children}
+            <div className="bg-gradient-to-br from-blue-200 to-white min-h-screen flex items-center justify-center">
+              <div className="w-full mx-auto">
+                  <Icon />
+              {children}
+              </div>
+            </div>
           </RecoilRoot>
         </ThirdwebProvider>
       </body>
