@@ -1,11 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ConnectButton } from "thirdweb/react";
 import { chainById } from "../utils/chains";
 import { useRouter } from 'next/navigation';
 import WelcomeBanner from "./welcome_banner";
+import { getPolls } from "@/utils/api";
 
 interface PollInfo {
-    title: string,
+    name: string,
     description: string
 }
 
@@ -19,12 +20,12 @@ const TEST_POLL_DATA: PollInfo = {
     description: "Test Poll Description"
 }
 
-const TEST_ON_GOING_POLLS = Array.from({ length: 10 }).fill(TEST_POLL_DATA); //FIXME testdata
-const TEST_COMPLETED_POLLS = Array.from({ length: 10 }).fill(TEST_POLL_DATA); //FIXME testdata
 const HomePage = () => {
 
-    const [ongoingPolls, setOngoingPolls] = useState<any[]>(TEST_ON_GOING_POLLS);
-    const [completedPolls, setCompletedPolls] = useState<any[]>(TEST_COMPLETED_POLLS);
+    const [ongoingPolls, setOngoingPolls] = useState<any[]>([]);
+    const [completedPolls, setCompletedPolls] = useState<any[]>([]);
+
+    const [allPolls, setAllPolls] = useState<any[]>([]);
 
     const router = useRouter();
 
@@ -32,6 +33,18 @@ const HomePage = () => {
         router.push("/create_poll");
     }
 
+    useEffect(() => {
+        const init = async () => {
+            const _polls = Array.from((await getPolls()).list);
+            console.log("_polls", _polls);
+            setAllPolls(_polls);
+            const _ongoingPolls = _polls.filter((poll: any) => poll.metadata.endTime > Date.now());
+            setOngoingPolls(_ongoingPolls);
+            const _completedPolls = _polls.filter((poll: any) => poll.metadata.endTime < Date.now());
+            setCompletedPolls(_completedPolls);
+        }
+        init();
+    }, []);
     return (
         <div className="w-full mx-auto">
             <button
@@ -76,10 +89,10 @@ const PollItem = (props: {
     const btnRef = useRef<any>();
     return (
 
-        <div className="mb-4 rounded-md shadow p-10 flex justify-between bg-white">
-            <div>
-                <p className="text-black">{props.poll.title}</p>
-                <p className="text-gray-500">
+        <div className="mb-4 rounded-md shadow p-10 flex justify-between bg-white h-[200px]">
+            <div className="w-full box-border">
+                <p className="text-black overflow-hidden w-full">{props.poll.name}</p>
+                <p className="text-gray-500 overflow-hidden h-[100px] w-full">
                     {props.poll.description}
                 </p>
             </div>

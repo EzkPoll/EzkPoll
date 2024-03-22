@@ -11,15 +11,18 @@ const PageFinishCreate = () => {
         router.push("/");
     }
     const handlePreview = () => {
-        router.push("/");
+        router.push("/join_poll");
     }
     return (
         <>
             <AddressLabel/>
             <div className='flex flex-col max-w-xl mx-auto'>
                 <h1 className="text-black text-4xl text-center font-bold">
-                    Congrats! Your Poll just published!
+                    Congrats! Your Testcase just published!
                 </h1>
+                <p className="text-gray-600 text-xl text-center my-10">
+                    Your voice matters and will make impact to he better world
+                </p>
                 <div className="rounded-[40px] py-10 flex flex-col gap-6 items-center relative w-[600px] bg-white">
 
                     <Image src={thumbUp} width={296} height={244} alt="finish"/>

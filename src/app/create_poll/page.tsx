@@ -8,7 +8,6 @@ import WelcomeBanner from "@/components/welcome_banner";
 import { useRouter } from "next/navigation";
 
 const Home = () => {
-    const [description, setDescription] = useState("");
     const [subject, setSubject] = useState("");
     const [duration, setDuration] = useState("");
     const router = useRouter();
@@ -21,7 +20,7 @@ const Home = () => {
         <>
             <AddressLabel/>
             <WelcomeBanner/>
-            <div className="bg-white rounded-3xl max-w-2xl mx-auto p-10">
+            <div className="bg-white rounded-3xl max-w-2xl mx-auto p-10 mb-10">
                 <div className="flex">
                     <h2 className="text-black text-center text-3xl">Create A/B testing poll</h2>
                     {/*FIXME AB testing component*/}
@@ -34,7 +33,7 @@ const Home = () => {
                         className="block text-gray-700 text-lg font-bold mb-2"
                         htmlFor="subject"
                     >
-                        Test Subject
+                        Poll Subject
                     </label>
                     <input
                         className="w-full text-lg bg-gray-50 rounded-md px-4 py-2 mt-3 mb-8" 
@@ -44,21 +43,6 @@ const Home = () => {
                         placeholder="Enter Subject"
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
-                    />
-                    <label
-                        className="block text-gray-700 text-lg font-bold mb-2"
-                        htmlFor="description"
-                    >
-                        Description
-                    </label>
-                    <input
-                        className="w-full text-lg bg-gray-50 rounded-md px-4 py-2 mt-3 mb-8" 
-                        id="description"
-                        name="description"
-                        type="text" 
-                        placeholder="Enter Description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
                     />
                     <label
                         className="block text-gray-700 text- font-bold mb-2"
@@ -75,22 +59,14 @@ const Home = () => {
                         value={duration}
                         onChange={(e) => setDuration(e.target.value)}
                     />
-                    <div className="flex gap-2 my-5">
-                        <div className="w-1/2 text-gray-400">
-                            <p className="mb-4">
-                                Upload Case A image
-                            </p>
-                            <UploadComponent/>
-                        </div>
-                        <div className="w-1/2 text-gray-400">
-                            <p className="mb-4">
-                                Upload Case B image
-                            </p>
-                            <UploadComponent/>
-                        </div>
+                    <div className="w-full text-gray-400">
+                        <p className="mb-4">
+                            Upload .csv file
+                        </p>
+                        <UploadComponent/>
                     </div>
                     <button
-                        className=" mt-5 mx-auto block bg-sky-blue hover:bg-blue-700 text-blue-700  hover:text-white font-bold py-2 px-4 rounded-lg"
+                        className="w-[296px] mx-auto rounded-[9px] px-8 py-[14px] flex gap-6 justify-center items-center self-stretch relative bg-[#e9f1ff] text-[#4285f4] font-bold mt-5"
                         onClick={handleCreatePoll}
                     >
                         Create Poll
@@ -104,10 +80,10 @@ const Home = () => {
 const UploadComponent = () => {
     return (
         <div className="flex items-center justify-center">
-            <label htmlFor="dropzone-file" className="flex flex-col border-0 items-center justify-center w-full h-64 border-2 border-gray-300  rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+            <label htmlFor="dropzone-file" className="flex flex-col border-0 items-center justify-center w-full h-64 border-0 border-gray-300  rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                    <Image src={upload_icon} alt="upload_icon" width={50} height={50}/>
-                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Upload .JPG/.PNG</p>
+                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Upload .csv</p>
                 </div>
                 <input id="dropzone-file" type="file" className="w-0" />
             </label>

@@ -7,6 +7,8 @@ const nextConfig = {
             "picsum.photos",
         ],
     },
+    allowedHosts: ["https://ezkpoll-backend.onrender.com/"],
+    allowedOrigin: ["https://ezkpoll-backend.onrender.com/"],
 };
 
 export default nextConfig;

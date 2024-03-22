@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { RecoilRoot, useSetRecoilState } from "recoil";
 import { addressAtom } from "@/state/state";
 import { useRouter } from "next/navigation";
+import { getPolls } from "@/utils/api";
 
 export default function Home() {
 
@@ -23,6 +24,9 @@ export default function Home() {
         if (address) {
             setAddress(address);
         }
+        getPolls().then((resp) => {
+            console.log(resp);
+        });
     }, [address]);
     const handleSignInWithMetaMask = async () => {
 
