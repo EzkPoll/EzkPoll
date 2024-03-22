@@ -28,10 +28,9 @@ export const getPolls = async () => {
 }
 export const getPollById = async (id: number) => {
     const response = await fetchJson(
-        api_url + "polls",
+        api_url + "poll/{id}?id=" + id,
         {
             method: "GET",
-            id: id
         })
         .then((res) => res);
     return response;

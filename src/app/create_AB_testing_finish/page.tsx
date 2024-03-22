@@ -7,12 +7,15 @@ import { useRouter } from 'next/navigation';
 const PageFinishCreate = () => {
 
     const router = useRouter();
+
     const handleBack = () => {
         router.push("/");
     }
+
     const handlePreview = () => {
         router.push("/join_poll");
     }
+
     return (
         <>
             <AddressLabel/>

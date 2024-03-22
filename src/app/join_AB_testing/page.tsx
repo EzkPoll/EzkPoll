@@ -2,10 +2,10 @@
 import WelcomeBanner from "@/components/welcome_banner";
 import { useRouter } from "next/navigation";
 
-const PageJoinPoll = () => {
+const PageJoinABTesting = () => {
     const router = useRouter();
-    const handleJoinPoll = () => {
-        router.push("/do_poll");
+    const handleJoinABTest = () => {
+        router.push("/do_AB_testing");
     }
 
     return (
@@ -28,7 +28,7 @@ const PageJoinPoll = () => {
                 </p>
                 <button
                     className="text-[#4285f4] w-[296px] rounded-[9px] px-8 py-[14px] flex gap-6 justify-center items-center self-stretch relative mx-auto mt-5 bg-[#e9f1ff]"
-                    onClick={handleJoinPoll}
+                    onClick={handleJoinABTest}
                 >
                     Join test
                 </button>
@@ -37,4 +37,4 @@ const PageJoinPoll = () => {
     )
 }
 
-export default PageJoinPoll;
+export default PageJoinABTesting;

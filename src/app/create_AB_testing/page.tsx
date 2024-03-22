@@ -29,9 +29,9 @@ const Home = () => {
         const resultPoll = deepCopy(templateABTest);
         resultPoll.name = subject;
         resultPoll.description = description;
-        resultPoll.metadata.estimatedTime = parseInt(duration);
         resultPoll.metadata.startTime = Date.now();
         resultPoll.metadata.endTime = Date.now() +  parseInt(duration) * 1000;
+
         const { url_1, url_2 } = await getUploadImgUrls();
         resultPoll.questions[0].options[0].oimg = url_1;
         resultPoll.questions[0].options[1].oimg = url_2;
@@ -73,7 +73,7 @@ const Home = () => {
             <WelcomeBanner/>
             <div className="bg-white rounded-3xl max-w-2xl mx-auto p-10">
                 <div className="flex">
-                    <h2 className="text-black text-center text-3xl">Create A/B testing poll</h2>
+                    <h2 className="text-black text-center text-3xl">Create A/B testing</h2>
                     {/*FIXME AB testing component*/}
                 </div>
                 <form action="javascript:void(0)" className="w-full block" onChange={(e) => e.preventDefault()}>

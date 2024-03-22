@@ -1,9 +1,12 @@
 "use client"
 import WelcomeBanner from "@/components/welcome_banner";
+import { selectedPollAtom } from "@/state/state";
 import { useRouter } from "next/navigation";
+import { useRecoilValue } from "recoil";
 
 const PageJoinPoll = () => {
     const router = useRouter();
+    const selectedPoll = useRecoilValue(selectedPollAtom);
     const handleJoinPoll = () => {
         router.push("/do_poll");
     }
@@ -14,7 +17,7 @@ const PageJoinPoll = () => {
             <div className="rounded-[40px] px-10 py-10 relative w-[600px] bg-white mx-auto">
                 <div className="relative w-[132px] h-8 bg-[#e9f1ff]">
                     <p className="tracking-[-0.024em] text-center font-medium leading-6 text-xs text-[#565656]">
-                        Polling till 2024/3/21
+                        {selectedPoll.metadata.endTime}
                     </p>
                 </div>
                 <div className="w-full flex flex-col gap-6 items-center mt-5">

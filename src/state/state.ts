@@ -18,7 +18,8 @@ export const selectedPollAtom = atom<Poll>({
         "metadata": {
             "endTime": 1711111960152,
             "startTime": 1711025560152,
-            "estimatedTime": 86400000
+            "estimatedTime": 86400000,
+            "isAb": false
         },
         "createdAt": "2024-03-21T13:00:22.314Z",
         "updatedAt": "2024-03-21T13:00:22.314Z",
@@ -54,7 +55,7 @@ export const selectedPollAtom = atom<Poll>({
  * @const
  */
 export const templateABTestAtom = atom<Poll>({
-    key: "selected_poll",
+    key: "template_poll",
     default: ({
         "id": -1,
         "name": "",
@@ -64,7 +65,8 @@ export const templateABTestAtom = atom<Poll>({
         "metadata": {
             "endTime": 0,
             "startTime": 0,
-            "estimatedTime": 86400000
+            "estimatedTime": 86400000,
+            "isAb": true
         },
         "createdAt": "",
         "updatedAt": "",

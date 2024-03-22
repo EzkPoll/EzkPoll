@@ -30,7 +30,6 @@ const PageDoPoll = () => {
             return;
         }
         const finalResult = [...result, selectedOptionId]; // final round selection
-        alert(finalResult); //FIXME result
         //write summit zk, the result is [...result, selectedOptionId]
         router.push("/do_poll_finish");
     }
