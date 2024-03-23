@@ -1,4 +1,5 @@
 "use client"
+import { FormControl } from "@/components/components";
 import WelcomeBanner from "@/components/welcome_banner";
 import { useRouter } from "next/navigation";
 
@@ -20,6 +21,8 @@ const PageJoinABTesting = () => {
                 <h4 className="tracking-[-0.048em] text-center font-bold leading-[38px] text-2xl text-black">
                     Image generation A/B Test
                 </h4>
+                <FormControl value={"publickey"}/>
+                <FormControl value={"rpivatekey"}/>
                 <p className="tracking-[-0.032em] text-center leading-6 text-base text-[#8f9bba] my-10">
                     This A/B test is to collect and train AI models to better serve people in general.
                 </p>

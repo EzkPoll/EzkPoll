@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ConnectButton } from "thirdweb/react";
+import { ConnectButton, useConnect } from "thirdweb/react";
 import { chainById } from "../utils/chains";
 import { useRouter } from 'next/navigation';
 import WelcomeBanner from "./welcome_banner";
@@ -37,8 +37,8 @@ const HomePage = () => {
     const [completedPolls, setCompletedPolls] = useState<any[]>([]);
 
     const [allPolls, setAllPolls] = useState<any[]>([]);
-
     const router = useRouter();
+    const connect = useConnect();
 
     const handleCreatePoll = () => {
         router.push("/create_AB_testing");
@@ -92,6 +92,8 @@ const HomePage = () => {
                         ))}
                 </div>
                 </div>
+                <button
+                onClick={()=>{connect.connect({})}}>connect</button>
             </div>
         </div>
     )
@@ -138,7 +140,7 @@ const PollItem = (props: {
                 </p>
             </div>
             <ConnectButton
-                chain={chainById}
+                chain={chainById}  
             />
             <button
                 className="bg-sky-blue hover:bg-blue-700 text-blue-700  hover:text-white font-bold py-2 px-4 rounded-lg"
