@@ -51,7 +51,7 @@ const PageShowResult = () => {
                 {`<`} Back
             </button>
             <div className=" py-10 px-10 flex flex-col gap-6 items-center relative w-full bg-white mx-auto mb-10">
-                <div className="w-[600px] h-[600px]">
+                <div className="w-[600px] h-[700px]">
                     <Doughnut data={data}/>
                 </div>
             </div>
