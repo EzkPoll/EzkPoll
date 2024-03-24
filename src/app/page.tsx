@@ -5,7 +5,7 @@ import { defineChain } from 'thirdweb';
 import { useActiveAccount, useActiveWallet, useActiveWalletConnectionStatus } from "thirdweb/react";
 import HomePage from "@/components/page_home";
 import { useEffect } from "react";
-import { RecoilRoot, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { addressAtom } from "@/state/state";
 import { useRouter } from "next/navigation";
 import { getPolls } from "@/utils/api";

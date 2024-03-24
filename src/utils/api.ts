@@ -35,4 +35,15 @@ export const createPoll = async (pollData: Poll) => {
     return response;
 }
 
+export const signUp = async (signUpData: any) => {
+    const { data: response } = await axios.post(
+        api_url + "sign-up", signUpData)
+    return response;
+}
+
+export const poll = async (pollData: any) => {
+    const { data: response } = await axios.post(
+        api_url + "poll", pollData)
+    return response;
+}
 

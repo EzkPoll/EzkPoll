@@ -98,3 +98,12 @@ export const templateABTestAtom = atom<Poll>({
     })
 })
 
+export const publicKeyAtom =atom<string>({
+    key: "P_KEY",
+    default: ""
+})
+
+export const sercetKeyAtom =atom<string>({
+    key: "SECRET_KEY",
+    default: ""
+})

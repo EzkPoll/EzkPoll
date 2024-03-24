@@ -23,7 +23,7 @@ export default function RootLayout({
           <RecoilRoot>
             <div className="bg-gradient-to-br from-blue-200 to-white min-h-screen flex">
               <div className="w-full mx-auto">
-                <div className="mb-10">
+                {/* <div className="mb-10">
                   <Link href="/test" className="bg-red-500 mx-1 rounded p-5">test</Link>
                   <Link href="/create_poll" className="bg-red-500 mx-1 rounded p-5">create poll</Link>
                   <Link href="/create_poll_finish" className="bg-red-500 mx-1 rounded p-5">create poll F</Link>
@@ -37,7 +37,7 @@ export default function RootLayout({
                   <Link href="/join_AB_testing" className="bg-blue-500 mx-1 rounded p-5">join AB testing</Link>
                   <Link href="/do_AB_testing" className="bg-blue-500 mx-1 rounded p-5">do AB testing</Link>
                   <Link href="/do_AB_testing_finish" className="bg-blue-500 mx-1 rounded p-5">do AB testing F</Link>
-                </div>
+                </div> */}
                 <Icon />
                 {children}
               </div>

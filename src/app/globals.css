@@ -55,3 +55,27 @@ button.create {
 input {
   color: black;
 }
+
+.tw-connect-wallet {
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  opacity: 0 !important;
+  padding: 0 !important;
+}
+
+.tw-connected-wallet {
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  opacity: 0 !important;
+  padding: 0 !important;
+}
+
+.tw-connected-wallet image {
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  opacity: 0 !important;
+  padding: 0 !important;
+}

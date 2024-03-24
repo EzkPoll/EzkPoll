@@ -1,15 +1,21 @@
 "use client"
-import { FormControl } from "@/components/components";
+import { AddressLabel, FormControl } from "@/components/components";
 import WelcomeBanner from "@/components/welcome_banner";
+import { publicKeyAtom, sercetKeyAtom } from "@/state/state";
 import { useRouter } from "next/navigation";
+import { useRecoilValue } from "recoil";
 
 const PageJoinABTesting = () => {
     const router = useRouter();
     const handleJoinABTest = () => {
         router.push("/do_AB_testing");
     }
+    const publicKey = useRecoilValue(publicKeyAtom);
+    const secretKey = useRecoilValue(sercetKeyAtom);
 
     return (
+        <>
+        <AddressLabel/>
         <div className="w-[600px] mx-auto border border-black flex flex-col gap-6 items-center relative bg-white px-10 py-10">
             <WelcomeBanner/>
             <div className="relative w-[132px] h-8 bg-transparent">
@@ -19,10 +25,10 @@ const PageJoinABTesting = () => {
             </div>
             <div className="w-full">
                 <h4 className="tracking-[-0.048em] text-center font-bold leading-[38px] text-2xl text-black">
-                    Image generation A/B Test
+                    Please remember your secret key
                 </h4>
-                <FormControl value={"publickey"}/>
-                <FormControl value={"rpivatekey"}/>
+                <FormControl value={publicKey} show={true}/>
+                <FormControl value={secretKey} show={false}/>
                 <p className="tracking-[-0.032em] text-center leading-6 text-base text-[#8f9bba] my-10">
                     This A/B test is to collect and train AI models to better serve people in general.
                 </p>
@@ -37,6 +43,7 @@ const PageJoinABTesting = () => {
                 </button>
             </div>
         </div>
+        </>
     )
 }
 

@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ConnectButton, useConnect } from "thirdweb/react";
+import { keccak256 } from "thirdweb";
+import { ConnectButton, useConnect, useActiveWallet } from "thirdweb/react";
 import { chainById } from "../utils/chains";
 import { useRouter } from 'next/navigation';
 import WelcomeBanner from "./welcome_banner";
-import { getPollById, getPolls } from "@/utils/api";
+import { getPollById, getPolls, signUp } from "@/utils/api";
 import { metamaskWallet } from "thirdweb/wallets";
 const metamaskConfig = metamaskWallet();
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { addressAtom, publicKeyAtom, selectedPollAtom, sercetKeyAtom } from "@/state/state";
+import { genKeyPair } from "@/utils/crypto";
 
 interface PollInfo {
     // title: string;
@@ -29,35 +33,29 @@ export enum PollType {
     completed = "completed"
 }
 
-const TEST_POLL_DATA: PollInfo = {
-    // TODO:
-    // title: "Test Poll",
-    description: "Test Poll Description",
-    id: 0,
-    name: "Test Poll",
-    address: "",
-    blockNumber: "",
-    metadata: {
-        startTime: 0,
-        endTime: 0,
-        estimatedTime: 0,
-        isAb: false
-    },
-    createdAt: "",
-    updatedAt: ""
-}
-
 const HomePage = () => {
 
     const [ongoingPolls, setOngoingPolls] = useState<any[]>([]);
     const [completedPolls, setCompletedPolls] = useState<any[]>([]);
-
+    const address = useRecoilValue(addressAtom);
+    const setAddress = useSetRecoilState(addressAtom);
     const [allPolls, setAllPolls] = useState<any[]>([]);
+    const wallet = useActiveWallet();
     const router = useRouter();
     const connect = useConnect();
 
     const handleCreatePoll = () => {
-        router.push("/create_AB_testing");
+        triggerConnect();
+        if (address) {
+            router.push("/create_AB_testing");
+        }
+    }
+
+    const triggerConnect = () => {
+        const btn = document.querySelector(".tw-connect-wallet") as HTMLButtonElement;
+        if (btn) {
+            btn.click();
+        }
     }
 
     useEffect(() => {
@@ -72,8 +70,19 @@ const HomePage = () => {
         }
         init();
     }, []);
+
+    useEffect(() => {
+        if (address) {
+            setAddress(address);
+        }
+        getPolls().then((resp: any) => {
+            console.log(resp);
+        });
+    }, [address]);
+
     return (
         <div className="w-full mx-auto">
+            <ConnectButton/>
             <button
                 className="bg-sky-blue hover:bg-blue-700 text-blue-700  hover:text-white font-bold py-2 px-4 rounded-lg create"
                 onClick={handleCreatePoll}
@@ -109,7 +118,10 @@ const HomePage = () => {
                 </div>
                 </div>
                 <button
-                onClick={()=>{connect.connect(metamaskConfig)}}>connect</button>
+                    onClick={()=>{connect.connect(metamaskConfig)}}
+                >
+                    connect
+                </button>
             </div>
         </div>
     )
@@ -121,11 +133,18 @@ const PollItem = (props: {
 }) => {
     const btnRef = useRef<any>();
     const router = useRouter();
+    const setSelectedPoll = useSetRecoilState(selectedPollAtom);
+    const setAddress = useSetRecoilState(addressAtom);
+    const setPublicKey = useSetRecoilState(publicKeyAtom);
+    const setSecretKey = useSetRecoilState(sercetKeyAtom);
+    const address = useRecoilValue(addressAtom);
+
+    const wallet = useActiveWallet();
 
     const handleJoinPoll = () => {
-
         getPollById(props.poll.id)
             .then((res) => {
+                setSelectedPoll(res);
                 console.log("res", res);
                 if (res.metadata.isAb) {
                     router.push("/join_AB_testing");
@@ -138,13 +157,57 @@ const PollItem = (props: {
         router.push("/result");
     }
 
-    const handleClick = ( ) => {
-        if (props.type === PollType.completed) {
-            handleViewResult(); 
-        } else {
-            handleJoinPoll();
+    const triggerConnect = () => {
+        const btn = document.querySelector(".tw-connect-wallet") as HTMLButtonElement;
+        if (btn) {
+            btn.click();
         }
     }
+
+    const handleClick = async ( ) => {
+        if (props.type === PollType.completed) {
+            handleViewResult();
+        } else {
+            if (!address) {
+                triggerConnect();
+                return;
+            }
+            wallet?.getAccount()?.signMessage({message: `${props.poll.name}`})
+                .then((signature) => {
+                    console.log("res", signature);
+                    const hashedSig = keccak256(signature);
+                    console.log({
+                        signature,
+                        hashedSig,
+                    });
+
+                    const result = genKeyPair(BigInt(hashedSig));
+                    setPublicKey(result.publicKey);
+                    setSecretKey(result.privateKey);
+                    const signUpData = {
+                        "pollId": props.poll.id,
+                        "address": address.address,
+                        "maciPubKey": result.publicKey
+                    };
+                    console.log(JSON.stringify(signUpData));
+                    signUp(signUpData).then((res) => {
+                        alert(res);
+                        console.log("Signup", res);
+                    }).catch(() => {});
+                    handleJoinPoll();
+                }).catch(() => {
+                    //pass
+                })
+        }
+    }
+    useEffect(() => {
+        if (address) {
+            setAddress(address);
+        }
+        getPolls().then((resp) => {
+            console.log(resp);
+        });
+    }, [address]);
 
     return (
 
@@ -155,9 +218,7 @@ const PollItem = (props: {
                     {props.poll.description}
                 </p>
             </div>
-            <ConnectButton
-                chain={chainById}  
-            />
+
             <button
                 className="bg-sky-blue hover:bg-blue-700 text-blue-700  hover:text-white font-bold py-2 px-4 rounded-lg"
                 onClick={handleClick}

@@ -11,11 +11,11 @@ const PageShowResult = () => {
     const canvasEl = useRef<any>(null);
     const router = useRouter();
     const data = {
-        labels: ['Red', 'Blue', 'Yellow'],
+        labels: ['BTC', 'ETH'],
         datasets: [{
-            label: 'My First Dataset',
-            data: [300, 50, 100],
-            backgroundColor: ['#fdd09f', '#fed0ee', '#dbaeff'],
+            label: 'which one is your favorite?',
+            data: [300, 50],
+            backgroundColor: ['#fdd09f', '#fed0ee'],
             hoverOffset: 4,
         }],
     };
@@ -36,7 +36,7 @@ const PageShowResult = () => {
                 {`<`} Back
             </button>
             <div className=" py-10 px-10 flex flex-col gap-6 items-center relative w-full bg-white mx-auto mb-10">
-                <div className="w-[600px]">
+                <div className="w-[1000px]">
                     <Doughnut data={data}/>
                 </div>
             </div>
