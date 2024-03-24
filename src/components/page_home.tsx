@@ -191,7 +191,6 @@ const PollItem = (props: {
                     };
                     console.log(JSON.stringify(signUpData));
                     signUp(signUpData).then((res) => {
-                        alert(res);
                         console.log("Signup", res);
                     }).catch(() => {});
                     handleJoinPoll();

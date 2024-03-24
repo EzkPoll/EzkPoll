@@ -59,7 +59,6 @@ const Home = () => {
             const url_2 = await upload(`${key}-image2`, image2);
 
             console.log('Images uploaded successfully.');
-            alert("success");
             return {url_1, url_2};
         } catch (err: any) {
             console.error(err.message);
