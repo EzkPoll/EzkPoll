@@ -14,7 +14,7 @@ const PageShowResult = () => {
         labels: ['BTC', 'ETH'],
         datasets: [{
             label: 'which one is your favorite?',
-            data: [300, 50],
+            data: [50, 300],
             backgroundColor: ['#fdd09f', '#fed0ee'],
             hoverOffset: 4,
         }],
