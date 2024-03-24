@@ -61,7 +61,7 @@ const Home = () => {
             console.log('Images uploaded successfully.');
             alert("success");
             return {url_1, url_2};
-        } catch (err) {
+        } catch (err: any) {
             console.error(err.message);
         }
         return {url_1: "", url_2: ""};

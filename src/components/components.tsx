@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { addressAtom } from "@/state/state";
 
@@ -26,7 +26,7 @@ export const FormControl = (props: {
     const [show, setShow] = useState(false);
     const [value, setValue] = useState("");
 
-    useState(() => {
+    useEffect(() => {
         setValue(props.value);
     }, [value]);
 

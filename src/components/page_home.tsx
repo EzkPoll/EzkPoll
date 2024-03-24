@@ -4,8 +4,11 @@ import { chainById } from "../utils/chains";
 import { useRouter } from 'next/navigation';
 import WelcomeBanner from "./welcome_banner";
 import { getPollById, getPolls } from "@/utils/api";
+import { metamaskWallet } from "thirdweb/wallets";
+const metamaskConfig = metamaskWallet();
 
 interface PollInfo {
+    // title: string;
     "id": number,
     "name": string,
     "description": string,
@@ -27,8 +30,21 @@ export enum PollType {
 }
 
 const TEST_POLL_DATA: PollInfo = {
-    title: "Test Poll",
-    description: "Test Poll Description"
+    // TODO:
+    // title: "Test Poll",
+    description: "Test Poll Description",
+    id: 0,
+    name: "Test Poll",
+    address: "",
+    blockNumber: "",
+    metadata: {
+        startTime: 0,
+        endTime: 0,
+        estimatedTime: 0,
+        isAb: false
+    },
+    createdAt: "",
+    updatedAt: ""
 }
 
 const HomePage = () => {
@@ -93,7 +109,7 @@ const HomePage = () => {
                 </div>
                 </div>
                 <button
-                onClick={()=>{connect.connect({})}}>connect</button>
+                onClick={()=>{connect.connect(metamaskConfig)}}>connect</button>
             </div>
         </div>
     )

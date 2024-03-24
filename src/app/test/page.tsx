@@ -9,15 +9,15 @@ const YourComponent = () => {
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event: any) => {
     setFile(event.target.files[0]);
   };
 
-  const handleImage1Change = (event) => {
+  const handleImage1Change = (event: any) => {
     setImage1(event.target.files[0]);
   };
 
-  const handleImage2Change = (event) => {
+  const handleImage2Change = (event: any) => {
     setImage2(event.target.files[0]);
   };
 
@@ -40,7 +40,7 @@ const YourComponent = () => {
       console.log(url_2);
 
       console.log('Images uploaded successfully.');
-    } catch (err) {
+    } catch (err: any) {
       console.error(err.message);
     }
     setLoading(false);
@@ -69,7 +69,7 @@ const YourComponent = () => {
 
       console.log('File uploaded successfully.');
 
-    } catch (err) {
+    } catch (err: any) {
       console.error(err.message);
     }
     setLoading(false);
